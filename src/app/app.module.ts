@@ -5,8 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { DataTableModule } from "angular-6-datatable";
 import { DatePipe } from '@angular/common';
-import { DatePickerModule} from '@syncfusion/ej2-angular-calendars';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { httpInterceptorProviders } from './auth/auth-interceptor';
 import { HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
@@ -14,8 +13,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { ToasterModule,ToasterService } from 'angular2-toaster';
 
-import {ScheduleModule} from '@syncfusion/ej2-angular-schedule';
-
+ 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
@@ -74,9 +72,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ScheduleModule,
-    DatePickerModule,
-    DataTableModule,
+      DataTableModule,
     ToasterModule,
     BrowserAnimationsModule,
     NgxSmartModalModule.forRoot() ,

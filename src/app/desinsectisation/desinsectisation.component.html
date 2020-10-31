@@ -103,9 +103,7 @@
       <div class="form-group">
         <label for="nresponsable">quantite</label>
         <input type="number" class="form-control" name="quantite"  [value]="0"[(ngModel)]="form.quantite" #label="ngModel" required />
-        <div *ngIf="f.submitted && quantite.invalid">
-          <div *ngIf="quantite.errors.required">quantite responsable is required</div>
-        </div>
+         
       </div>
 
       <div class="form-group">
