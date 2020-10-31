@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@import './assets/assets/css/datatables/datatables.min.css';
+@import './assets/assets/vendors/css/base/bootstrap.min.css';
+@import './assets/assets/vendors/css/base/elisyam-1.5.min.css';
+/*@import "~@ng-select/ng-select/themes/default.theme.css"; */
+@import 'node_modules/angular2-toaster/toaster.min.css';
+@import "~ngx-smart-modal/ngx-smart-modal.css";
+ 
+.pointer {
+  cursor: pointer;
+}
+
+.ng-sidebar {
+  background: red;
+  width: 15rem;
+}
+
+.default-sidebar>.side-navbar.shrinked a {
+  padding: 17px 3px;
+}
+
+.ng-sidebar--right {
+  color: red !important;
+  background: antiquewhite;
+  width: 30rem;
+}
+svg:not(:root){
+  overflow: inherit;
+
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f2f2f2;
+}
+

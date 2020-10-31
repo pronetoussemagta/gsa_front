@@ -1,0 +1,119 @@
+<section class="content">
+  <div class="block-header">
+    <div class="row">
+      <div class="col-lg-7 col-md-6 col-sm-12">
+        <h2>{{ 'CALENDAR.TITLE' | translate }}
+        </h2>
+      </div>
+      <div class="col-lg-5 col-md-6 col-sm-12">
+        <button (click)="ngxSmartModalService.getModal('myModal').open()">{{ 'HEADER.ADD' | translate }}</button>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+
+    <!-- Advanced Validation -->
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+
+          <div class="body">
+
+
+            <table class="table table-striped " [mfData]="niveaus" #mf="mfDataTable" [mfRowsOnPage]="5">
+              <thead>
+              <tr>
+
+                <th style="width: 10%">
+                  <mfDefaultSorter by="date">{{ 'CALENDAR.DATE' | translate }}</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                  <mfDefaultSorter by="user.name">{{ 'CALENDAR.EMPLOYED' | translate }}</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                  <mfDefaultSorter by="company.label">{{ 'CALENDAR.COMPANY' | translate }}</mfDefaultSorter>
+
+                </th>
+                <th style="width: 10%">
+                  <mfDefaultSorter by="nom">{{ 'HEADER.ACTION' | translate }}</mfDefaultSorter>
+
+                </th>
+
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr *ngFor="let niveau of mf.data">
+
+                <td >{{niveau.date | date:'yyyy-MM-dd'}}</td>
+                <td>{{niveau.user.name}}</td>
+                <td>{{niveau.company.label}}</td>
+
+                <td>
+                  <a (click)="remove(niveau.id)"><i class="la la-close delete"></i></a>
+                </td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr>
+                <td colspan="3">
+                  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Begin Basic Modal -->
+<ngx-smart-modal #myModal identifier="myModal">
+  <h1>{{ 'CALENDAR.TITLE' | translate }}</h1>
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <div class="form-group">
+      <label for="date">date</label>
+      <input type="date" class="form-control" name="label" [(ngModel)]="form.date"  #date="ngModel" required />
+      <div *ngIf="f.submitted && date.invalid">
+        <div *ngIf="date.errors.required">{{ 'CALENDAR.DATE' | translate }} {{ 'HEADER.ISREQUIRED' | translate }}</div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+
+    <select  [(ngModel)]="selecteduser"  name="mater" class="form-control selectpicker show-tick">
+      <option *ngFor="let user of users" [value]="user.id">
+        {{ user.name }} </option>
+
+    </select>
+    <p *ngIf="selecteduser">  {{ 'CALENDAR.EMPLOYED' | translate }} {{ 'HEADER.SELECT' | translate }} </p>
+</div>
+
+    <div class="col-sm-6">
+      <select   [(ngModel)]="selectedcompany"   name="profile" class="form-control selectpicker show-tick">
+        <option *ngFor="let company of companys" [value]="company.id">
+          {{ company.label }} </option>
+
+      </select>
+      <p  *ngIf="selectedcompany" >{{ 'CALENDAR.COMPANY' | translate }} {{ 'HEADER.SELECT' | translate }}  </p>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary">{{ 'HEADER.ADD' | translate }} </button>
+      <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
+        erreur!<br/>{{errorMessage}}
+      </div>
+    </div>
+  </form>
+ 
+</ngx-smart-modal>
+
+<!-- End Basic Modal -->
+
+  <div class="row col-sm-6" style="max-width:350px;">
+
+  </div>
+
+</section>

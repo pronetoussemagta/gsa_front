@@ -1,0 +1,163 @@
+
+
+
+<section class="content">
+  <div class="block-header">
+    <div class="row">
+      <div class="col-lg-7 col-md-6 col-sm-12">
+        <h2>{{ 'FICHE.TITLE' | translate }} 
+        </h2>
+      </div>
+      <div class="col-lg-5 col-md-6 col-sm-12">
+
+        <button (click)="ngxSmartModalService.getModal('myModal').open()">{{ 'HEADER.ADD' | translate }} </button>
+
+  
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+
+    <!-- Advanced Validation -->
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+
+          <div style="overflow-x:auto;">
+
+            {{myDate | date:'yyyy-MM-dd'}}
+            <table class="table table-striped " [mfData]="fiches" #mf="mfDataTable" [mfRowsOnPage]="5">
+              <thead>
+              <tr>
+
+
+                <th style="width: 10%">
+                  <mfDefaultSorter by="nom">{{ 'FICHE.RESPONSIBLENAME' | translate }} </mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                  <mfDefaultSorter by="nom">{{ 'FICHE.UNCERTICIDE' | translate }} </mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                  <mfDefaultSorter by="nom">{{ 'FICHE.SUPERVISORNAME' | translate }}</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                  <mfDefaultSorter by="nom">{{ 'FICHE.OBSERVATIONS' | translate }}</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                  <mfDefaultSorter by="nom">{{ 'FICHE.ARRIVALTIME' | translate }}</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                  <mfDefaultSorter by="nom">{{ 'FICHE.DEPARTURETIME' | translate }}</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                  <mfDefaultSorter by="nom">{{ 'HEADER.ACTION' | translate }}</mfDefaultSorter>
+
+                </th>
+
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr *ngFor="let fich of mf.data">
+
+                <td >{{fich.nresponsable}}</td>
+                <td >{{fich.incerticide}}</td>
+                <td >{{fich.nencadreur}}</td>
+                <td >{{fich.observations}}</td>
+                <td >{{fich.harrive}}</td>
+                <td >{{fich.hdepart}}</td>
+
+               <td > <a (click)="remove(fich.id)"><i class="la la-close delete"></i></a> </td>
+                <td> <a mat-button [routerLink]="['template/deratisation', fich.id,fich.company.id]"> deratisation</a></td>
+                <td> <a mat-button [routerLink]="['template/desinsectisation', fich.id,fich.company.id]"> desinsectisation</a></td>
+
+              </tr>
+
+              </tbody>
+              <tfoot>
+              <tr>
+                <td colspan="3">
+                  <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                </td>
+              </tr>
+              </tfoot>
+
+            </table>
+
+
+
+
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+
+<!-- Begin Basic Modal -->
+<ngx-smart-modal #myModal identifier="myModal">
+  <h1>Title</h1>
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="nresponsable">Nom responsable</label>
+        <input type="text" class="form-control" name="label" [(ngModel)]="form.nresponsable" #label="ngModel" required />
+        <div *ngIf="f.submitted && label.invalid">
+          <div *ngIf="label.errors.required">Nom responsable is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="incerticide">incerticide</label>
+        <input type="text" class="form-control" name="label" [(ngModel)]="form.incerticide" #label="ngModel" required />
+        <div *ngIf="f.submitted && label.invalid">
+          <div *ngIf="label.errors.required">incerticide is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="nencadreur">Nom encadreur</label>
+        <input type="text" class="form-control" name="label" [(ngModel)]="form.nencadreur" #label="ngModel" required />
+        <div *ngIf="f.submitted && label.invalid">
+          <div *ngIf="label.errors.required">Nom encadreur is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="observations">observations</label>
+        <input type="text" class="form-control" name="label" [(ngModel)]="form.observations" #label="ngModel" required />
+        <div *ngIf="f.submitted && label.invalid">
+          <div *ngIf="label.errors.required">observations is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="Harrive">Harrive</label>
+        <input type="time" class="form-control" name="label" min="08:00" max="18:00" [(ngModel)]="form.harrive" #label="ngModel" required />
+        <div *ngIf="f.submitted && label.invalid">
+          <div *ngIf="label.errors.required">Harrive is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="hdepart">hdepart</label>
+        <input type="time" class="form-control" name="label" min="08:00" max="18:00" [(ngModel)]="form.hdepart" #label="ngModel" required />
+        <div *ngIf="f.submitted && label.invalid">
+          <div *ngIf="label.errors.required">Harrive is required</div>
+        </div>
+      </div>
+     
+      <div class="form-group">
+        <button class="btn btn-primary">Ajouter</button>
+        <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
+          erreur!<br/>{{errorMessage}}
+        </div>
+      </div>
+    </form>
+    <button (click)="myModal.close()">Close</button>
+  </ngx-smart-modal>
+
+  <!-- End Basic Modal -->
+
+
+</section>

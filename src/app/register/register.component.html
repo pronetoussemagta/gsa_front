@@ -1,0 +1,57 @@
+<div *ngIf="isSignedUp; else signupForm">
+  Your registration is successful. Please login!
+</div>
+
+<ng-template #signupForm>
+  <div class="row col-sm-6" style="max-width:350px;">
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="name"> {{ 'MEMBER.NAME' | translate }} </label>
+        <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel" required />
+        <div *ngIf="f.submitted && name.invalid">
+          <div *ngIf="name.errors.required"> {{ 'MEMBER.NAME' | translate }}   {{ 'HEADER.ISREQUIRED' | translate }} </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="username"> {{ 'MEMBER.USERNAME' | translate }} </label>
+        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel"
+          required />
+        <div *ngIf="f.submitted && username.invalid">
+          <div *ngIf="username.errors.required"> {{ 'MEMBER.USERNAME' | translate }}  {{ 'HEADER.ISREQUIRED' | translate }} </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address"> {{ 'MEMBER.ADDRESS' | translate }} </label>
+        <input type="text" class="form-control" name="username" [(ngModel)]="form.address" #address="ngModel"
+               required />
+        <div *ngIf="f.submitted && address.invalid">
+          <div *ngIf="address.errors.required"> {{ 'MEMBER.ADDRESS' | translate }}   {{ 'HEADER.ISREQUIRED' | translate }} </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email"> {{ 'MEMBER.EMAIL' | translate }} </label>
+        <input type="text" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel" required email />
+        <div *ngIf="f.submitted && email.invalid">
+          <div *ngIf="email.errors.required"> {{ 'MEMBER.EMAIL' | translate }}  {{ 'HEADER.ISREQUIRED' | translate }} </div>
+          <div *ngIf="email.errors.email">{{ 'MEMBER.EMAILVALID' | translate }} </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password"> {{ 'COMPANY.PASSWORD' | translate }} </label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
+          required minlength="6" />
+        <div *ngIf="f.submitted && password.invalid">
+          <div *ngIf="password.errors.required"> {{ 'MEMBER.PASSWORD' | translate }}   {{ 'HEADER.ISREQUIRED' | translate }} </div>
+          <div *ngIf="password.errors.minlength">{{ 'MEMBER.PASSWORDVALID' | translate }} </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary"> {{ 'HEADER.ADD' | translate }} </button>
+        <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
+          Signup failed!<br/>{{errorMessage}}
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
