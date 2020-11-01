@@ -123,9 +123,8 @@ export class DesinsectisationComponent implements OnInit {
     this.desinsectisationService.save(this.Desinsectisation,this.fi,this.selectedlocaux,this.selectedproduit).subscribe(
       data => {
         this.toasterService.pop('success', this.successToasterTitle, this.successToasterBody);
-        this.zone.runOutsideAngular(() => {
-          location.reload();
-      });
+        this.ngOnInit();
+        this.ngOnInit();
         this.isSignedUp = true;
         this.isSignUpFailed = false;
       },

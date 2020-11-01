@@ -123,9 +123,8 @@ fi : any =null ;
       data => {
         this.toasterService.pop('success', this.successToasterTitle, this.successToasterBody);
 
-        this.zone.runOutsideAngular(() => {
-          location.reload();
-      });
+      this.ngOnInit();
+      this.ngOnInit();
         this.isSignedUp = true;
         this.isSignUpFailed = false;
       },

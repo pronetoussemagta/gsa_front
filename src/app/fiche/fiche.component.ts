@@ -14,7 +14,7 @@ import {calendar} from '../calendar/calendar';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ToasterService, ToasterConfig, Toast, ClickHandler, OnActionCallback, ToasterModule, BodyOutputType } from 'angular2-toaster';
 import { TranslateService } from '@ngx-translate/core';
-
+ 
 @Component({
   selector: 'app-fiche',
   templateUrl: './fiche.component.html',
@@ -35,7 +35,7 @@ export class FicheComponent implements OnInit {
   erreurToasterBody: string;
 
   myDate = new Date();
-
+  public companyid : any;
   public selecteduser = null;
   public selectedcompany = null;
   public selectedcalendar = null;
@@ -84,12 +84,19 @@ export class FicheComponent implements OnInit {
 
    ngOnInit() {
 
-    
+   
 
     this.loadData();
   }
 
  loadData() {
+  this.route.params.subscribe(params => {
+      
+       
+    this.companyid = params['companyid'];
+    
+
+    });
      this.calendarService.getAll().subscribe(data => {
       for (let entry of data) {
         if (entry.date == this.datePipe.transform(this.myDate, "yyyy-MM-dd")) {
@@ -125,16 +132,16 @@ export class FicheComponent implements OnInit {
 
     });
 
-
+ 
 
     this.ficheService.getAll().subscribe(data => {
-
+console.log("all",data)
       if (data != null) {
 
         if (this.users[0].roles[0].name == 'ROLE_USER') {
 
           for (let entry of data) {
-            if (entry.calendar.date == this.datePipe.transform(this.myDate, "yyyy-MM-dd")) {
+            if (entry.calendar.date == this.datePipe.transform(this.myDate, "yyyy-MM-dd") && entry.company.id == this.companyid) {
               if (this.token.getUsername() == entry.user.username) {
 
                 this.Fichea.push(entry);

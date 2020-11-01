@@ -26,7 +26,7 @@
           <div style="overflow-x:auto;">
 
             {{myDate | date:'yyyy-MM-dd'}}
-            <table class="table table-striped " [mfData]="fiches" #mf="mfDataTable" [mfRowsOnPage]="5">
+            <table *ngIf="fiches" class="table table-striped " [mfData]="fiches" #mf="mfDataTable" [mfRowsOnPage]="5">
               <thead>
               <tr>
 
